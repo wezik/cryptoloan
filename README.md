@@ -1,5 +1,5 @@
 ## About
-This project is a Rest API you can use for creating loans storing them, auto creating and calculating installments etc.
+This project is a Rest API you can use for creating loans, storing them, auto creating and calculating installments etc.
 
 All of that between many currencies including BitCoin
 
