@@ -1,3 +1,26 @@
+## About
+This project is a Rest API you can use for creating loans storing them, auto creating and calculating installments etc.
 
-# Front End 
+All of that between many currencies including BitCoin
+
+## Front End
+You can use my Front End project to run it
+
 https://github.com/wezik/cryptoloan-frontend
+
+## Requirements
+Java 11
+
+Gradle
+
+MySQL
+
+## How to run
+setup your MySQL database in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L11-L14) file
+
+build your gradle with `gradlew build` in terminal
+
+## How to configure
+You can change amount of days API uses to calculate time between installments, punishing old ones or setting up final date of a loan in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L16-L17)
+
+You can also customize your port but it requires you to change it as well in frontend project if you want to use it.
