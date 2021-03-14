@@ -29,6 +29,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation('com.google.code.gson:gson')
+    implementation group: 'org.hibernate', name: 'hibernate-envers', version: '5.4.29.Final'
 }
 
 
