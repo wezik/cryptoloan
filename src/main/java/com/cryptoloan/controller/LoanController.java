@@ -6,6 +6,7 @@ import com.cryptoloan.exception.LoanNotFoundException;
 import com.cryptoloan.mapper.LoanMapper;
 import com.cryptoloan.service.InstallmentDbService;
 import com.cryptoloan.service.LoanDbService;
+import com.cryptoloan.validator.InstallmentValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class LoanController {
 
     private final LoanDbService loanDbService;
     private final InstallmentDbService installmentDbService;
+    private final InstallmentValidator installmentValidator;
 
     private final LoanMapper loanMapper;
 

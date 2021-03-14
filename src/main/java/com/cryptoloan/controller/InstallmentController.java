@@ -1,9 +1,12 @@
 package com.cryptoloan.controller;
 
+import com.cryptoloan.domain.Installment;
 import com.cryptoloan.domain.dto.InstallmentDto;
 import com.cryptoloan.exception.InstallmentNotFoundException;
 import com.cryptoloan.mapper.InstallmentMapper;
 import com.cryptoloan.service.InstallmentDbService;
+import com.cryptoloan.service.LoanDbService;
+import com.cryptoloan.validator.InstallmentValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,8 @@ public class InstallmentController {
 
     private final InstallmentMapper installmentMapper;
     private final InstallmentDbService installmentDbService;
+    private final InstallmentValidator installmentValidator;
+    private final LoanDbService loanDbService;
 
     @GetMapping("installments/{id}")
     public InstallmentDto getInstallment(@PathVariable Long id) throws InstallmentNotFoundException {
@@ -30,19 +35,23 @@ public class InstallmentController {
 
     @PostMapping("installments")
     public void addInstallment(@RequestBody InstallmentDto installmentDto) {
-        installmentDbService.save(installmentMapper.mapToInstallment(installmentDto));
+        Installment saved = installmentDbService.save(installmentMapper.mapToInstallment(installmentDto));
+        installmentValidator.checkAndCorrectInstallmentCountFor(saved.getLoan().getId());
+
     }
 
     @PutMapping("installments")
     public InstallmentDto updateInstallment(@RequestBody InstallmentDto installmentDto) {
-        return installmentMapper.mapToInstallmentDto(
-                installmentDbService.save(installmentMapper.mapToInstallment(installmentDto))
-        );
+        Installment saved = installmentDbService.save(installmentMapper.mapToInstallment(installmentDto));
+        installmentValidator.checkAndCorrectInstallmentCountFor(saved.getLoan().getId());
+        return installmentMapper.mapToInstallmentDto(saved);
     }
 
     @DeleteMapping("installments/{id}")
     public void deleteInstallment(@PathVariable Long id) throws InstallmentNotFoundException {
-        installmentDbService.delete(installmentDbService.get(id).orElseThrow(InstallmentNotFoundException::new));
+        Installment installment = installmentDbService.get(id).orElseThrow(InstallmentNotFoundException::new);
+        installmentDbService.delete(installment);
+        installmentValidator.checkAndCorrectInstallmentCountFor(installment.getLoan().getId());
     }
 
 }

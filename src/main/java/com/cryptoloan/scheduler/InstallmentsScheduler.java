@@ -18,7 +18,7 @@ public class InstallmentsScheduler {
     @Scheduled(cron = "0 0 4 * * *")
     //@Scheduled(fixedDelay = 20000)
     public void run() {
-        installmentValidator.checkAndCorrectInstallmentCount();
+        installmentValidator.checkAndCorrectInstallmentCountForAllActive();
         int newInstallments = installmentValidator.createNewInstallments().size();
         int penalizedInstallments = installmentValidator.penalizeAndCorrectOldInstallments().size();
         int reevaluatedInstallments = installmentValidator.reevaluateAndCorrectInstallments().size();

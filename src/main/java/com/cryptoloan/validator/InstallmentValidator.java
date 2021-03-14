@@ -47,24 +47,31 @@ public class InstallmentValidator {
         return resultList;
     }
 
-    public void checkAndCorrectInstallmentCount() {
+    public void checkAndCorrectInstallmentCountForAllActive() {
         LOGGER.info("Checking for incorrect values of installments count in active loans");
-        loanDbService.getAllActive().forEach(e -> {
-            int value = installmentDbService.getAllByLoanId(e.getId()).size();
-            if (e.getInstallmentsCreated() != value) {
-                e.setInstallmentsCreated(value);
-                loanDbService.save(e);
-            }
-        });
+        loanDbService.getAllActive().forEach(this::correctLoan);
+    }
+
+    public void checkAndCorrectInstallmentCountFor(Long id) {
+        loanDbService.get(id).ifPresent(this::correctLoan);
     }
 
     public Loan validateInstallmentsForLoan(Loan loan) {
-        LOGGER.info("Validating installments for loan with id: "+loan.getId());
-        int value = installmentDbService.getAllByLoanId(loan.getId()).size();
-        if (loan.getInstallmentsCreated() != value) {
-            loan.setInstallmentsCreated(value);
-        }
+        checkAndCorrectInstallmentCountFor(loan.getId());
         return loan;
+    }
+
+    private void correctLoan(Loan loan) {
+        List<Installment> installments = installmentDbService.getAllByLoanId(loan.getId());
+        int created = installments.size();
+        int paid = (int) installments.stream()
+                .filter(Installment::isPaid)
+                .count();
+        if (loan.getInstallmentsCreated() != created) {
+            loan.setInstallmentsCreated(created);
+            loan.setInstallmentsPaid(paid);
+            loanDbService.save(loan);
+        }
     }
 
     public List<Installment> penalizeAndCorrectOldInstallments() {
