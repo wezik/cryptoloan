@@ -5,7 +5,6 @@ import com.cryptoloan.domain.dto.InstallmentDto;
 import com.cryptoloan.exception.InstallmentNotFoundException;
 import com.cryptoloan.mapper.InstallmentMapper;
 import com.cryptoloan.service.InstallmentDbService;
-import com.cryptoloan.service.LoanDbService;
 import com.cryptoloan.validator.InstallmentValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ public class InstallmentController {
     private final InstallmentMapper installmentMapper;
     private final InstallmentDbService installmentDbService;
     private final InstallmentValidator installmentValidator;
-    private final LoanDbService loanDbService;
 
     @GetMapping("installments/{id}")
     public InstallmentDto getInstallment(@PathVariable Long id) throws InstallmentNotFoundException {

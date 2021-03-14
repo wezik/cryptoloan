@@ -56,11 +56,6 @@ public class InstallmentValidator {
         loanDbService.get(id).ifPresent(this::correctLoan);
     }
 
-    public Loan validateInstallmentsForLoan(Loan loan) {
-        checkAndCorrectInstallmentCountFor(loan.getId());
-        return loan;
-    }
-
     private void correctLoan(Loan loan) {
         List<Installment> installments = installmentDbService.getAllByLoanId(loan.getId());
         int created = installments.size();
