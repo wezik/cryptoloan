@@ -2,10 +2,12 @@ package com.cryptoloan.controller;
 
 import com.cryptoloan.config.MainConfig;
 import com.cryptoloan.facade.ExchangeCalculatorFacade;
+import com.cryptoloan.singleton.CurrenciesFlow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -24,42 +26,7 @@ public class AppController {
 
     @GetMapping("currencies")
     public Set<String> getCurrencies() {
-        return Set.of(
-                "CAD",
-                "HKD",
-                "ISK",
-                "PHP",
-                "DKK",
-                "HUF",
-                "CZK",
-                "AUD",
-                "RON",
-                "SEK",
-                "IDR",
-                "INR",
-                "BRL",
-                "RUB",
-                "HRK",
-                "JPY",
-                "THB",
-                "CHF",
-                "SGD",
-                "PLN",
-                "BGN",
-                "TRY",
-                "CNY",
-                "NOK",
-                "NZD",
-                "ZAR",
-                "USD",
-                "MXN",
-                "ILS",
-                "GBP",
-                "KRW",
-                "MYR",
-                "EUR",
-                "BTC"
-        );
+        return new HashSet<String>(CurrenciesFlow.INSTANCE.getAvailableCurrencies());
     }
 
     @GetMapping("exchange/{currency1}/{currency2}")
