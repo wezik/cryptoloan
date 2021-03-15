@@ -16,9 +16,14 @@ Gradle
 MySQL
 
 ## How to run
-setup your MySQL database in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L11-L14) file
+Setup your MySQL database in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L11-L14) file
 
-build your gradle with `gradlew build` in terminal
+Build your gradle with `gradlew build` in terminal
+
+Run the project
+
+## Note
+Reevaluation of installments as well as data tracking entities are set-up by scheduler, it will always run on application start or every day at 4AM by default, if you want to see it work just re-run the project.
 
 ## How to configure
 You can change amount of days API uses to calculate time between installments, punishing old ones or setting up final date of a loan in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L16-L17)
