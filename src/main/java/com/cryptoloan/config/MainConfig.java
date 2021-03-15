@@ -1,6 +1,6 @@
 package com.cryptoloan.config;
 
-import com.cryptoloan.scheduler.InstallmentsScheduler;
+import com.cryptoloan.scheduler.Scheduler;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,11 +15,11 @@ public class MainConfig {
     private int timePeriodDays;
 
     @Autowired
-    private InstallmentsScheduler installmentsScheduler;
+    private Scheduler scheduler;
 
     @Bean
     public void onLaunch() {
-        installmentsScheduler.run();
+        scheduler.run();
     }
 
 }

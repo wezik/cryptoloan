@@ -1,5 +1,6 @@
 package com.cryptoloan.scheduler;
 
+import com.cryptoloan.updater.TrackersUpdater;
 import com.cryptoloan.validator.InstallmentValidator;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -9,11 +10,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class InstallmentsScheduler {
+public class Scheduler {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(InstallmentsScheduler.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(Scheduler.class);
 
     private final InstallmentValidator installmentValidator;
+    private final TrackersUpdater trackersUpdater;
 
     @Scheduled(cron = "0 0 4 * * *")
     //@Scheduled(fixedDelay = 20000)
@@ -22,14 +24,17 @@ public class InstallmentsScheduler {
         int newInstallments = installmentValidator.createNewInstallments().size();
         int penalizedInstallments = installmentValidator.penalizeAndCorrectOldInstallments().size();
         int reevaluatedInstallments = installmentValidator.reevaluateAndCorrectInstallments().size();
+        trackersUpdater.updateCurrenciesTracker();
+        trackersUpdater.updateLoanTypesTracker();
         LOGGER.info(
                 "CREATED INSTALLMENTS: " +
-                newInstallments +
-                " PENALIZED INSTALLMENTS: " +
-                penalizedInstallments +
-                " REEVALUATED INSTALLMENTS: " +
-                reevaluatedInstallments
+                        newInstallments +
+                        " PENALIZED INSTALLMENTS: " +
+                        penalizedInstallments +
+                        " REEVALUATED INSTALLMENTS: " +
+                        reevaluatedInstallments
         );
+        LOGGER.info("DATA TRACKERS UPDATED");
     }
 
 }
