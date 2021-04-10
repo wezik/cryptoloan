@@ -15,7 +15,7 @@ Gradle
 
 MySQL
 
-Exchangeratesapi.io basic subscription
+Exchangeratesapi.io basic or higher subscription
 
 ## How to run
 Setup your MySQL database in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L11-L14) file
