@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -49,7 +48,7 @@ class ExchangeCalculatorFacadeTest {
         // Given
         Map<String, BigDecimal> rates = new HashMap<>();
         rates.put("PLN",BigDecimal.valueOf(4.0));
-        Optional<ExchangeRatesDto> exchangeRatesDto = Optional.of(new ExchangeRatesDto(rates,"USD", LocalDate.now()));
+        Optional<ExchangeRatesDto> exchangeRatesDto = Optional.of(new ExchangeRatesDto(rates,"USD"));
         Mockito.when(exchangeRatesService.getExchangeRatesForCurrency("USD")).thenReturn(exchangeRatesDto);
 
         // When
