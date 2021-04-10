@@ -15,8 +15,12 @@ Gradle
 
 MySQL
 
+Exchangeratesapi.io basic subscription
+
 ## How to run
 Setup your MySQL database in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L11-L14) file
+
+Provide your API key by setting environment variable called `EXCHANGERATES_API_KEY`
 
 Build your gradle with `gradlew build` in terminal
 
