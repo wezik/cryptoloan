@@ -32,7 +32,6 @@ public enum CurrenciesFlow {
                     values.add(e.getKey());
                 }
                 List<String> addedCurrencies = List.of(
-                        "EUR",
                         "BTC"
                 );
                 values.addAll(addedCurrencies);

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 public class ExchangeRatesConfig {
 
     @Value("${exchangerates.api.endpoint.prod}")
-    private String ExchangeRatesApiEndpoint;
+    private String exchangeRatesApiEndpoint;
+
+    @Value("${exchangerates.api.key}")
+    private String exchangeRatesApiKey;
 
 }

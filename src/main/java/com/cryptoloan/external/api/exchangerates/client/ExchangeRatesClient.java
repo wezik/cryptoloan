@@ -35,7 +35,9 @@ public class ExchangeRatesClient {
     private URI getExchangeRatesForCurrencyURI(String currency) {
         return UriComponentsBuilder.fromHttpUrl(
                 exchangeRatesConfig.getExchangeRatesApiEndpoint()
-                +"?base="
+                +"?access_key="
+                +exchangeRatesConfig.getExchangeRatesApiKey()
+                +"&base="
                 +currency.toUpperCase())
                 .build().encode().toUri();
     }
@@ -50,7 +52,10 @@ public class ExchangeRatesClient {
     }
 
     private URI getExchangeRatesForEurURI() {
-        return UriComponentsBuilder.fromHttpUrl(exchangeRatesConfig.getExchangeRatesApiEndpoint()).build().encode().toUri();
+        return UriComponentsBuilder.fromHttpUrl(exchangeRatesConfig.getExchangeRatesApiEndpoint()
+                +"?access_key="
+                +exchangeRatesConfig.getExchangeRatesApiKey())
+                .build().encode().toUri();
     }
 
 }
