@@ -33,3 +33,7 @@ Reevaluation of installments as well as data tracking entities are set-up by sch
 You can change amount of days API uses to calculate time between installments, punishing old ones or setting up final date of a loan in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L16-L17)
 
 You can also customize your port but it requires you to change it as well in frontend project if you want to use it.
+
+## Updates
+
+10.04.2021 Fix allows for cryptoloan to still work after providing api key with at least basic subscription plan on exchangerates.io. Thier policy has changed therafore it's not possible anymore to convert currencies for free.
