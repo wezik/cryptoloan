@@ -1,39 +1,38 @@
-## About
-This project is a Rest API you can use for creating loans, storing them, auto creating and calculating installments etc.
+# Cryptoloan API
 
-All of that between many currencies including BitCoin
+This project provides a REST API for creating loans, storing them, auto-creating and calculating installments, and supports multiple currencies, including Bitcoin.
 
 ## Front End
-You can use my Front End project to run it
 
-https://github.com/wezik/cryptoloan-frontend
+You can use the [Cryptoloan Frontend](https://github.com/wezik/cryptoloan-frontend) project to interact with the API.
 
 ## Requirements
-Java 11
 
-Gradle
+- Java 11
+- Gradle
+- MySQL
+- Exchangeratesapi.io basic or higher subscription
 
-MySQL
+## How to Run
 
-Exchangeratesapi.io basic or higher subscription
-
-## How to run
-Setup your MySQL database in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L11-L14) file
-
-Provide your API key by setting environment variable called `EXCHANGERATES_API_KEY` or by pasting it into [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L6)
-
-Build your gradle with `gradlew build` in terminal
-
-Run the project
+1. Set up your MySQL database in the `application.properties` file.
+2. Provide your API key by setting an environment variable called `EXCHANGERATES_API_KEY` or by pasting it into `application.properties`.
+3. Build the project with `gradlew build` in the terminal.
+4. Run the project with `./gradlew run`.
 
 ## Note
-Reevaluation of installments as well as data tracking entities are set-up by scheduler, it will always run on application start or every day at 4AM by default, if you want to see it work just re-run the project.
 
-## How to configure
-You can change amount of days API uses to calculate time between installments, punishing old ones or setting up final date of a loan in [application.properties](https://github.com/wezik/cryptoloan/blob/main/src/main/resources/application.properties#L16-L17)
+Reevaluation of installments and data tracking entities are set up by a scheduler, which runs on application start or every day at 4 AM by default. If you want to see it work, re-run the project.
 
-You can also customize your port but it requires you to change it as well in frontend project if you want to use it.
+## How to Configure
+
+You can customize the following settings in the `application.properties` file:
+- Amount of days API uses to calculate time between installments
+- Punishing old installments
+- Setting up the final date of a loan
+
+You can also customize the port, but remember to update it in the frontend project if you want to use it.
 
 ## Updates
 
-10.04.2021 Fix allows for cryptoloan to still work after providing api key with at least basic subscription plan on exchangerates.io. Thier policy has changed therafore it's not possible anymore to convert currencies for free.
+- **10.04.2021**: Fixed compatibility issue with Exchangerates.io API's new policy. Cryptoloan can still work with at least basic subscription plan. However, some currencies may not be accessible due to the policy change. Default currencies are unaffected.
